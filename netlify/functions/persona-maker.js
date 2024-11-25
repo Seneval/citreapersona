@@ -12,16 +12,25 @@ exports.handler = async (event) => {
       };
     }
 
-    // Prompt para OpenAI
+    // Prompt actualizado para incluir todos los elementos indicados
     const prompt = `
 Eres un experto en marketing y creación de User Personas. Basándote en la información proporcionada, genera una User Persona en español que incluya:
 
-1. Psicografía:
-   - Dolencias (retos o problemas principales)
-   - Necesidades (qué necesita el usuario para resolver sus problemas)
-   - Principales desafíos (dificultades clave para alcanzar sus objetivos)
+1. Demografía:
+   - Nombre
+   - Edad
+   - Puesto
 
-2. Comportamientos de Compra:
+2. Psicografía:
+   - Características personales (orientación profesional, valores, actitudes)
+   - Metas profesionales
+   - Dolencias (retos o problemas principales)
+   - Necesidades
+   - Principales desafíos
+
+3. Comportamientos de Compra:
+   - Catalizadores de compra (motivos clave para tomar una decisión de compra)
+   - Frecuencia de compra
    - Canales preferidos (dónde prefiere buscar soluciones)
    - Cómo alcanzarlo online
    - Cómo alcanzarlo offline
@@ -31,7 +40,7 @@ Detalles proporcionados:
 - Nombre del negocio: ${businessName}
 - Mercado objetivo: ${targetMarket}
 - Descripción del producto o servicio: ${productDescription}
-`;
+    `;
 
     // Llamada a la API de OpenAI con el modelo gpt-3.5-turbo
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -41,10 +50,10 @@ Detalles proporcionados:
         'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`, // Clave API desde .env
       },
       body: JSON.stringify({
-        model: 'gpt-3.5-turbo', // Cambiado a GPT-3.5
+        model: 'gpt-3.5-turbo', // Modelo más rápido y eficiente
         messages: [{ role: 'user', content: prompt }],
-        max_tokens: 600, // Aumentar a 600 tokens para más detalle
-        temperature: 0.7, // Mantener creatividad moderada
+        max_tokens: 800, // Ajustado para respuestas más detalladas
+        temperature: 0.7, // Creatividad balanceada
       }),
     });
 
