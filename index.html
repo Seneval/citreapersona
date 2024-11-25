@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Persona Maker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Persona Maker</h1>
+    <p>Build a personalized marketing persona for your business.</p>
+  </header>
+  <main>
+    <form id="persona-form">
+      <label for="business-name">Business Name:</label>
+      <input type="text" id="business-name" name="business-name" required>
+
+      <label for="target-market">Target Market:</label>
+      <input type="text" id="target-market" name="target-market" required>
+
+      <label for="product-description">Product/Service Description:</label>
+      <textarea id="product-description" name="product-description" required></textarea>
+
+      <button type="submit">Generate Persona</button>
+    </form>
+    <div id="persona-result"></div>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
