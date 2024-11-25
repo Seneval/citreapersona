@@ -12,7 +12,7 @@ exports.handler = async (event) => {
       };
     }
 
-    // Prompt para OpenAI en español con los ajustes solicitados
+    // Prompt para OpenAI en español
     const prompt = `
 Eres un experto en marketing y creación de User Personas. Con base en la información proporcionada, genera una User Persona en español que incluya:
 
@@ -22,9 +22,9 @@ Eres un experto en marketing y creación de User Personas. Con base en la inform
    - Estado civil
 
 2. Psicografía:
-   - Características personales (orientación profesional, valores, actitudes)
+   - Características personales
    - Metas profesionales
-   - Dolencias (retos o problemas principales)
+   - Dolencias
    - Necesidades
    - Principales desafíos
 
@@ -56,6 +56,7 @@ Detalles proporcionados:
       }),
     });
 
+    // Verificar si la respuesta de OpenAI fue exitosa
     if (!response.ok) {
       const errorData = await response.json();
       console.error('Error en la API de OpenAI:', errorData);
@@ -68,15 +69,17 @@ Detalles proporcionados:
     const data = await response.json();
     const persona = data.choices[0].message.content; // Contenido generado por OpenAI
 
+    // Retornar la respuesta generada
     return {
       statusCode: 200,
       body: JSON.stringify({ persona }),
     };
   } catch (error) {
+    // Manejo detallado de errores
     console.error('Error en el servidor:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Ocurrió un error inesperado.' }),
+      body: JSON.stringify({ error: 'Ocurrió un error inesperado en el servidor.' }),
     };
   }
 };
