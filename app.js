@@ -11,6 +11,7 @@ form.addEventListener('submit', async (event) => {
   const data = { businessName, targetMarket, productDescription };
 
   try {
+    // Send data to the serverless function
     const response = await fetch('/.netlify/functions/persona-maker', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -18,7 +19,13 @@ form.addEventListener('submit', async (event) => {
     });
 
     const result = await response.json();
-    resultDiv.textContent = result.persona || 'Error generating persona.';
+
+    // Display the persona or an error message
+    if (result.persona) {
+      resultDiv.innerHTML = `<strong>Generated Persona:</strong><br>${result.persona}`;
+    } else {
+      resultDiv.textContent = result.error || 'Error generating persona.';
+    }
   } catch (error) {
     resultDiv.textContent = 'Error connecting to server.';
     console.error(error);
