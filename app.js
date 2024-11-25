@@ -1,15 +1,15 @@
 // Seleccionar el formulario y el div para mostrar resultados
-const form = document.getElementById('persona-form'); // Selecciona el formulario del HTML
-const resultDiv = document.getElementById('persona-result'); // Donde se mostrará la respuesta
+const form = document.getElementById('persona-form');
+const resultDiv = document.getElementById('persona-result');
 
 // Agregar evento para manejar el envío del formulario
 form.addEventListener('submit', async (event) => {
-  event.preventDefault(); // Previene que la página se recargue al enviar el formulario
+  event.preventDefault(); // Evitar que la página se recargue al enviar el formulario
 
   // Obtener los valores del formulario desde los inputs
-  const businessName = document.getElementById('business-name').value; // Nombre del negocio
-  const targetMarket = document.getElementById('target-market').value; // Mercado objetivo
-  const productDescription = document.getElementById('product-description').value; // Descripción del producto
+  const businessName = document.getElementById('business-name').value;
+  const targetMarket = document.getElementById('target-market').value;
+  const productDescription = document.getElementById('product-description').value;
 
   // Crear un objeto con los datos del formulario para enviarlo al backend
   const data = { businessName, targetMarket, productDescription };
@@ -29,10 +29,10 @@ form.addEventListener('submit', async (event) => {
     if (result.persona) {
       // Formatear el contenido generado para que se vea mejor
       const formattedPersona = result.persona
-        .split('\n') // Dividir el texto en líneas según los saltos de línea (\n)
+        .split('\n') // Dividir en líneas según los saltos de línea (\n)
         .filter(line => line.trim() !== '') // Quitar líneas vacías
         .map(line => `<p>${line}</p>`) // Envolver cada línea en un párrafo (<p>)
-        .join(''); // Combinar todas las líneas formateadas en un solo string HTML
+        .join('');
 
       // Mostrar el contenido formateado dentro del div de resultados
       resultDiv.innerHTML = `

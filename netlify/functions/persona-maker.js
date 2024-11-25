@@ -12,29 +12,20 @@ exports.handler = async (event) => {
       };
     }
 
-    // Prompt para OpenAI en español
+    // Prompt simplificado para OpenAI
     const prompt = `
-Eres un experto en marketing y creación de User Personas. Con base en la información proporcionada, genera una User Persona en español que incluya:
+Eres un experto en marketing y creación de User Personas. Basándote en la información proporcionada, genera una User Persona en español que incluya:
 
-1. Demografía:
-   - Nombre
-   - Edad
-   - Estado civil
+1. Psicografía:
+   - Dolencias (retos o problemas principales)
+   - Necesidades (qué necesita el usuario para resolver sus problemas)
+   - Principales desafíos (dificultades clave para alcanzar sus objetivos)
 
-2. Psicografía:
-   - Características personales
-   - Metas profesionales
-   - Dolencias
-   - Necesidades
-   - Principales desafíos
-
-3. Comportamientos de Compra:
-   - Presupuesto en pesos mexicanos ($)
-   - Frecuencia de compra
-   - Canales preferidos
+2. Comportamientos de Compra:
+   - Canales preferidos (dónde prefiere buscar soluciones)
    - Cómo alcanzarlo online
    - Cómo alcanzarlo offline
-   - Barreras para comprar
+   - Barreras para comprar (factores que dificultan la compra)
 
 Detalles proporcionados:
 - Nombre del negocio: ${businessName}
@@ -52,7 +43,7 @@ Detalles proporcionados:
       body: JSON.stringify({
         model: 'gpt-4', // Modelo GPT
         messages: [{ role: 'user', content: prompt }],
-        max_tokens: 500, // Ajustar según la longitud deseada
+        max_tokens: 300, // Ajustar según la longitud deseada
       }),
     });
 
