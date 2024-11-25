@@ -12,7 +12,7 @@ exports.handler = async (event) => {
       };
     }
 
-    // Prompt simplificado para OpenAI
+    // Prompt para OpenAI
     const prompt = `
 Eres un experto en marketing y creación de User Personas. Basándote en la información proporcionada, genera una User Persona en español que incluya:
 
@@ -31,9 +31,9 @@ Detalles proporcionados:
 - Nombre del negocio: ${businessName}
 - Mercado objetivo: ${targetMarket}
 - Descripción del producto o servicio: ${productDescription}
-    `;
+`;
 
-    // Llamada a la API de OpenAI
+    // Llamada a la API de OpenAI con el modelo gpt-3.5-turbo
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -41,9 +41,10 @@ Detalles proporcionados:
         'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`, // Clave API desde .env
       },
       body: JSON.stringify({
-        model: 'gpt-4', // Modelo GPT
+        model: 'gpt-3.5-turbo', // Cambiado a GPT-3.5
         messages: [{ role: 'user', content: prompt }],
-        max_tokens: 300, // Ajustar según la longitud deseada
+        max_tokens: 600, // Aumentar a 600 tokens para más detalle
+        temperature: 0.7, // Mantener creatividad moderada
       }),
     });
 
