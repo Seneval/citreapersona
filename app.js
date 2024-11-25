@@ -27,27 +27,27 @@ form.addEventListener('submit', async (event) => {
 
     // Display the persona or an error message
     if (result.persona) {
-      // Split the persona into sections for better readability
+      // Replace newlines with table formatting for better structure
       const formattedPersona = result.persona
-        .split('\n') // Split the response by line breaks
+        .split('\n') // Split response by newlines
         .filter(line => line.trim() !== '') // Remove empty lines
         .map(line => `<p>${line}</p>`) // Wrap each line in <p> tags
-        .join(''); // Combine them into a single HTML string
+        .join(''); // Combine into a single string
 
       // Insert the formatted persona into the result div
       resultDiv.innerHTML = `
-        <strong>Generated Persona:</strong>
+        <strong>Persona Generada:</strong>
         <div class="persona-content">
           ${formattedPersona}
         </div>
       `;
     } else {
-      // Display an error message if persona generation fails
-      resultDiv.textContent = result.error || 'Error generating persona.';
+      // Show error message if persona generation fails
+      resultDiv.textContent = result.error || 'Error al generar la persona.';
     }
   } catch (error) {
     // Handle any network or server errors
-    resultDiv.textContent = 'Error connecting to server.';
+    resultDiv.textContent = 'Error al conectarse con el servidor.';
     console.error(error);
   }
 });
