@@ -1,10 +1,15 @@
-// Seleccionar el formulario y el div para mostrar resultados
+// Seleccionar el formulario, el div para mostrar resultados, y el spinner
 const form = document.getElementById('persona-form');
 const resultDiv = document.getElementById('persona-result');
+const loadingDiv = document.getElementById('loading-spinner'); // Spinner de carga
 
 // Agregar evento para manejar el envío del formulario
 form.addEventListener('submit', async (event) => {
   event.preventDefault(); // Evitar que la página se recargue al enviar el formulario
+
+  // Mostrar el spinner y limpiar resultados anteriores
+  loadingDiv.style.display = 'block'; // Mostrar spinner
+  resultDiv.innerHTML = ''; // Limpiar resultados
 
   // Obtener los valores del formulario desde los inputs
   const businessName = document.getElementById('business-name').value;
@@ -24,6 +29,9 @@ form.addEventListener('submit', async (event) => {
 
     // Parsear la respuesta como JSON
     const result = await response.json();
+
+    // Ocultar el spinner una vez que se obtiene la respuesta
+    loadingDiv.style.display = 'none';
 
     // Mostrar la persona generada o un mensaje de error
     if (result.persona) {
@@ -47,6 +55,7 @@ form.addEventListener('submit', async (event) => {
     }
   } catch (error) {
     // Manejar errores de red o del servidor
+    loadingDiv.style.display = 'none'; // Ocultar el spinner
     resultDiv.textContent = 'Error al conectarse con el servidor.';
     console.error(error); // Imprime el error en la consola del navegador
   }

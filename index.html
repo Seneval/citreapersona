@@ -14,16 +14,23 @@
   <main>
     <form id="persona-form">
       <label for="business-name">Business Name:</label>
-      <input type="text" id="business-name" name="business-name" required>
+      <input type="text" id="business-name" placeholder="Enter your business name" required>
 
       <label for="target-market">Target Market:</label>
-      <input type="text" id="target-market" name="target-market" required>
+      <input type="text" id="target-market" placeholder="Enter your target market" required>
 
       <label for="product-description">Product/Service Description:</label>
-      <textarea id="product-description" name="product-description" required></textarea>
+      <textarea id="product-description" placeholder="Describe your product or service" required></textarea>
 
       <button type="submit">Generate Persona</button>
     </form>
+
+    <!-- Spinner de carga -->
+    <div id="loading-spinner" class="spinner" style="display: none;">
+      Generating persona, please wait...
+    </div>
+
+    <!-- Div para mostrar los resultados -->
     <div id="persona-result"></div>
   </main>
   <script src="app.js"></script>
